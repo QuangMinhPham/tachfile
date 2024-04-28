@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1714251167 source:c:\1codeeeeeeeeeeeeeeeee\laptrinhcoban\gameaftersplitingfile\main.cpp
+	"graphic.h"
+
+1714250180 source:c:\1codeeeeeeeeeeeeeeeee\laptrinhcoban\gameaftersplitingfile\graphic.cpp
+	<bits/stdc++.h>
+	"graphic.h"
+
+1714242066 c:\1codeeeeeeeeeeeeeeeee\laptrinhcoban\gameaftersplitingfile\def.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_net.h>
+
+1714241897 c:\1codeeeeeeeeeeeeeeeee\laptrinhcoban\gameaftersplitingfile\graphic.h
+	"def.h"
+
