@@ -19,6 +19,9 @@ SDL_Rect volume , volume_frame;
 Animation death,Enemy_8,GameOver;
 SDL_Rect *start1 , *start2 , *ava,  *bg , *Pause , *Pause1 , *Con , *Con1 ,
          *INTRO_B ,*QUIT_B , *VL_B ,*RETRY_B , *BACK_B , *VOL_ADJ , *MENU_B;
+string score_current;
+SDL_Texture* scoreTexture;
+SDL_Texture* score;
 
 
 bool isClickedInRect(int x, int y, SDL_Rect *rect) {
@@ -34,7 +37,16 @@ bool adjustVolume(int x, int y) {
     return true;
 
 }
+void renderTexture(SDL_Texture *texture, int x, int y)
+{
+    SDL_Rect dest;
 
+    dest.x = x;
+    dest.y = y;
+    SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
+
+    SDL_RenderCopy(renderer, texture, NULL, &dest);
+}
 void drawbrgscroll(SDL_Texture* texture, SDL_Renderer* renderer){
     static int roll1 = 0;
     SDL_Rect brg1;
@@ -410,7 +422,7 @@ if(!Paused)
         HIGHsico();
         SDL_RenderPresent(renderer);
 
-        if(CheckCollision(&player.rect))
+        if(CheckCollision(&player.rect)|| playerX>(tileMap[0].size()*TILE_SIZE)-100)
         {
             while(death.currentFrame!= DEATH_FRAMES-1)
             {
@@ -433,6 +445,9 @@ if(!Paused)
             Mix_HaltChannel(channel);
             musicPaused = false;
             }
+            SDL_Color color = {255, 50, 50, 255};
+            score_current = "Score: " + to_string(HIGHEST_SCORE);
+            score = renderText(score_current.c_str(), font, color);
             Mix_HaltChannel(channel);
             Mix_PauseMusic();
             HIGHEST_SCORE=0;
@@ -444,6 +459,11 @@ if(!Paused)
  }
  void DrawEndGame()
  {
+    SDL_Color color = {255, 50, 50, 255};
+    string scoreText = "High Score: " + to_string(highScore);
+    scoreTexture = renderText(scoreText.c_str(), font, color);
+
+
      SDL_Event e;
      GameOver.x=0;
      GameOver.y=-SCREEN_HEIGHT;
@@ -497,9 +517,14 @@ if(!Paused)
      SDL_RenderCopy(renderer,retry_b,NULL,RETRY_B);
      SDL_RenderCopy(renderer,menu_b,NULL,MENU_B);
      SDL_RenderCopy(renderer,quit_b,NULL,QUIT_B);
+     renderTexture(scoreTexture, SCREEN_WIDTH - 300 , 10);
+     renderTexture(score,10,10);
      TextEndGame();
      SDL_RenderPresent(renderer);
+
      }
+     SDL_DestroyTexture(scoreTexture);
+     SDL_DestroyTexture(score);
  }
 
 #endif // _HANDLEVENT__H
