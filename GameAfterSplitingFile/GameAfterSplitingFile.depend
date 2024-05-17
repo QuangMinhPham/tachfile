@@ -16,3 +16,191 @@
 1714241897 c:\1codeeeeeeeeeeeeeeeee\laptrinhcoban\gameaftersplitingfile\graphic.h
 	"def.h"
 
+1714274217 source:d:\vat ly\tachfile\gameaftersplitingfile\graphic.cpp
+	<bits/stdc++.h>
+	"graphic.h"
+
+1714274217 d:\vat ly\tachfile\gameaftersplitingfile\graphic.h
+	"def.h"
+
+1714276657 d:\vat ly\tachfile\gameaftersplitingfile\def.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+
+1714283703 source:d:\vat ly\tachfile\gameaftersplitingfile\main.cpp
+	"graphic.h"
+	"map.h"
+	"handleEvent.h"
+	"player.h"
+	"function.h"
+
+1714275485 d:\vat ly\tachfile\gameaftersplitingfile\map.h
+	"def.h"
+	"graphic.h"
+	<iostream>
+	"vector"
+
+1714283202 d:\vat ly\tachfile\gameaftersplitingfile\handleevent.h
+
+1714282143 d:\vat ly\tachfile\gameaftersplitingfile\player.h
+	"def.h"
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+
+1714283353 d:\vat ly\tachfile\gameaftersplitingfile\function.h
+
+1714670155 source:c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\graphic.cpp
+	<bits/stdc++.h>
+	"graphic.h"
+
+1714594618 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\graphic.h
+	"def.h"
+
+1714817826 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\def.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_net.h>
+	<SDL_ttf.h>
+
+1714671348 source:c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\main.cpp
+	"graphic.h"
+	"map.h"
+	"handleEvent.h"
+	"player.h"
+	"function.h"
+
+1714820134 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\map.h
+	"graphic.h"
+	"aniplayer.h"
+	<iostream>
+	<vector>
+
+1714820098 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\handleevent.h
+	"function.h"
+	"map.h"
+	"player.h"
+	"enemy.h"
+
+1714673003 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\player.h
+	"def.h"
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+	"handleEvent.h"
+
+1714673003 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\function.h
+	"graphic.h"
+
+1714673003 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\aniplayer.h
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+
+1714820098 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameaftersplitingfile\enemy.h
+
+1714827138 source:d:\gameaftersplitingfile\graphic.cpp
+	<bits/stdc++.h>
+	"graphic.h"
+
+1714820359 d:\gameaftersplitingfile\graphic.h
+	"def.h"
+
+1714827141 d:\gameaftersplitingfile\def.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+
+1714846815 source:d:\gameaftersplitingfile\main.cpp
+	"graphic.h"
+	"map.h"
+	"handleEvent.h"
+	"player.h"
+	"function.h"
+
+1714847770 d:\gameaftersplitingfile\map.h
+	"graphic.h"
+	"aniplayer.h"
+	<iostream>
+	<vector>
+
+1714846366 d:\gameaftersplitingfile\aniplayer.h
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+
+1714846730 d:\gameaftersplitingfile\handleevent.h
+	"function.h"
+	"map.h"
+	"player.h"
+	"enemy.h"
+
+1714820359 d:\gameaftersplitingfile\function.h
+	"graphic.h"
+
+1714822511 d:\gameaftersplitingfile\player.h
+	"def.h"
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+	"handleEvent.h"
+
+1714841709 d:\gameaftersplitingfile\enemy.h
+
+1715883443 source:c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\main.cpp
+	"handleEvent.h"
+	"player.h"
+
+1715883376 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\graphic.h
+	"def.h"
+
+1715885690 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\def.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+
+1715925763 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\map.h
+	"graphic.h"
+	"aniplayer.h"
+	"enemy.h"
+	<iostream>
+	<vector>
+
+1715844938 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\aniplayer.h
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+
+1715926789 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\handleevent.h
+	"function.h"
+	"map.h"
+	"player.h"
+	"enemy.h"
+	"highscore.h"
+
+1715785677 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\function.h
+	"graphic.h"
+
+1715881856 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\player.h
+	<SDL.h>
+	<SDL_image.h>
+	"graphic.h"
+
+1715884127 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\enemy.h
+	<bits/stdc++.h>
+	"aniplayer.h"
+
+1715885247 source:c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\graphic.cpp
+	<bits/stdc++.h>
+	"graphic.h"
+
+1715818631 c:\1codeeeeeeeeeeeeeeeee\phucdu\gameupdate\gameaftersplitingfile\highscore.h
+

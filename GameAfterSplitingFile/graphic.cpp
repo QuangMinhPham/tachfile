@@ -8,21 +8,30 @@ const char* linkURL = "https://www.facebook.com/phamminhmuondodaihoc";
 
 int V_RUN = 10;
 int mapOffsetX = 0;
+int mapOffsetY = 0;
 int playerX = 50, playerY = 50;
+int Object5_Y=0;
+int Object6_Y=0;
+int HIGHEST_SCORE=0;
 SDL_Texture *texture = NULL;
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Texture* animu = NULL;
+TTF_Font* gFont = NULL;
 Mix_Music* backgroundMusic = nullptr;
+Mix_Music* lavaMusic = nullptr;
+Mix_Chunk *lavaChunk = nullptr;
 SDL_Rect gSpriteClips[TOTAL_FRAMES];
 SDL_Rect gSpriteClips1[TOTAL_FRAMES];
+SDL_Texture *MainPlayer , *hinhnen , *image1 , *image2 , *linkAva , *playerTexture , *backgr , *PlayerDeath ,*enemy8 ,
+            *BULLET_WATER , *pause , *endgame , *introduce , *intro , *quit_b , *vl_b , *retry_b , *back_b , *menu_b ;
 
 void logErrorAndExit(const char* msg, const char* error) {
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "%s:%s", msg, error);
     SDL_Quit();
 }
 
-void initSDL(SDL_Window* &window, SDL_Renderer* &renderer) {
+void initSDL() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         logErrorAndExit("ERROR:", SDL_GetError());
     }
@@ -32,37 +41,19 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer) {
     if (renderer == NULL) { logErrorAndExit("ERROR:", SDL_GetError()); }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-}
 
-void openURL(const char* url) {
-
-        std::string command = "start " + std::string(url);
-
-    std::system(command.c_str());
-}
-bool initSDL_Mixer() {
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std::endl;
-        return false;
+    // Vẽ hình cho windowIcon :3
+    SDL_Surface *iconSurface = SDL_CreateRGBSurface(0, 40, 46, 32, 0, 255, 255, 255);
+    SDL_Surface *icon = SDL_LoadBMP("fox.bmp");
+    if (icon == NULL) {
+        printf("Could not load icon: %s\n", SDL_GetError());
+        return ;
     }
-    return true;
+    SDL_BlitSurface(icon, NULL, iconSurface, NULL);
+    SDL_SetWindowIcon(window, iconSurface);
 }
 
-bool loadAndPlayMusic() {
-    backgroundMusic = Mix_LoadMUS("souvernir.mp3");
-    if (!backgroundMusic) {
-        std::cerr << "Failed to load background music! SDL_mixer Error: " << Mix_GetError() << std::endl;
-        return false;
-    }
-    if (Mix_PlayMusic(backgroundMusic, -1) == -1) {
-        std::cerr << "Failed to play background music! SDL_mixer Error: " << Mix_GetError() << std::endl;
-        return false;
-    }
-
-    return true;
-}
-
-SDL_Texture* loadTexture(const char* filename, SDL_Renderer* renderer) {
+SDL_Texture* loadTexture(const char* filename) {
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
     SDL_Surface* surface = IMG_Load(filename);
     if (!surface) {
@@ -79,16 +70,64 @@ SDL_Texture* loadTexture(const char* filename, SDL_Renderer* renderer) {
     return texture;
 }
 
-vector<SDL_Texture*> loadTileTextures(SDL_Renderer* renderer) {
+void Init_Texture()
+{
+    MainPlayer      = loadTexture("player.png");
+    hinhnen         = loadTexture("scroll.png");
+    image1          = loadTexture("start1.png");
+    image2          = loadTexture("start2.png");
+    linkAva         = loadTexture("avatar.png");
+    backgr          = loadTexture("BGPLAY.png");
+    introduce       = loadTexture("intr_i.png");
+    intro           = loadTexture("intr_b.png");
+    quit_b          = loadTexture("quit_b.png");
+    vl_b            = loadTexture("volm_b.png");
+    retry_b         = loadTexture("Rtry_b.png");
+    back_b          = loadTexture("back_b.png");
+    menu_b          = loadTexture("menu_b.png");
+    quit_b          = loadTexture("quit_b.png");
+    playerTexture   = loadTexture("player.png");
+    PlayerDeath     = loadTexture("Deaths.png");
+    BULLET_WATER    = loadTexture("bullet.png");
+    enemy8          = loadTexture("enemyB.png");
+    pause           = loadTexture("paused.png");
+    endgame         = loadTexture("BG_END.png");
+}
+
+TTF_Font* loadFont(const char* path, int size)
+    {
+        gFont = TTF_OpenFont( path, size );
+        if (gFont == nullptr) {
+            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION,
+                           SDL_LOG_PRIORITY_ERROR,
+                           "Load font %s", TTF_GetError());
+        }
+        return gFont;
+    }
+
+vector<SDL_Texture*> loadTileTextures() {
     vector<SDL_Texture*> textures;
     SDL_Surface* whiteSurface = SDL_CreateRGBSurface(0, TILE_SIZE, TILE_SIZE, 32, 0, 0, 0, 0);
     SDL_FillRect(whiteSurface, NULL, SDL_MapRGB(whiteSurface->format, 255, 255, 255));
     textures.push_back(SDL_CreateTextureFromSurface(renderer, whiteSurface));
     SDL_FreeSurface(whiteSurface);
-    textures.push_back(IMG_LoadTexture(renderer, "1.png"));
-    textures.push_back(IMG_LoadTexture(renderer, "2.png"));
-    textures.push_back(IMG_LoadTexture(renderer, "3.png"));
-    textures.push_back(IMG_LoadTexture(renderer, "4.png"));
+    textures.push_back(loadTexture("1.png"));
+    textures.push_back(loadTexture("2.png"));
+    textures.push_back(loadTexture("3.png"));
+    textures.push_back(loadTexture("4.png"));
+    textures.push_back(loadTexture("5.png"));
+    textures.push_back(loadTexture("6.png"));
+    textures.push_back(loadTexture("7.png"));
+    textures.push_back(loadTexture("8.png"));
+    textures.push_back(loadTexture("9.png"));
+    textures.push_back(loadTexture("10.png"));
+    textures.push_back(loadTexture("11.png"));
+    textures.push_back(loadTexture("12.png"));
+    textures.push_back(loadTexture("13.png"));
+    textures.push_back(loadTexture("14.png"));
+    textures.push_back(loadTexture("15.png"));
+    textures.push_back(loadTexture("16.png"));
+    textures.push_back(loadTexture("17.png"));
 
     return textures;
 }
@@ -99,10 +138,11 @@ vector<vector<int>> readTileMapFromFile(const string& filename) {
     if (file.is_open()) {
         string line;
         while (getline(file, line)) {
+            istringstream iss(line);
+            int num;
             vector<int> row;
-            for (char c : line) {
-                if (c !='1' && c !='0'&& c!='2'&& c!='3'&& c!='4') continue;
-                row.push_back(c - '0');
+            while (iss >> num) {
+                row.push_back(num);
             }
             tileMap.push_back(row);
         }
@@ -111,42 +151,18 @@ vector<vector<int>> readTileMapFromFile(const string& filename) {
     return tileMap;
 }
 
-bool loadMedia() {
-    bool success = true;
-
-    animu = loadTexture("backgroundingame.png",renderer);
-    if (animu == NULL) {
-        std::cerr << "Failed to load texture image! SDL Error: " << SDL_GetError() << std::endl;
-        success = false;
-    }
-//        for (int i = 0; i < TOTAL_FRAMES; ++i) {
-//            gSpriteClips[i].x = i * FRAME_WIDTH;
-//            gSpriteClips[i].y = 0;
-//            gSpriteClips[i].w = FRAME_WIDTH;
-//            gSpriteClips[i].h = FRAME_HEIGHT;
-
-//            gSpriteClips1[i].x = 0;
-//            gSpriteClips1[i].y = 50;
-//            gSpriteClips1[i].w = FRAME_WIDTH;
-//            gSpriteClips1[i].h = FRAME_HEIGHT;
-
-
-//    }
-
-    return success;
-}
-
-void quitSDL(SDL_Renderer* renderer, SDL_Window* window ,vector<SDL_Texture*>& tileTextures) {
-
-        for (SDL_Texture* texture : tileTextures)
-        {
-            SDL_DestroyTexture(texture);
-        }
+void quitSDL() {
 
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         Mix_FreeMusic(backgroundMusic);
+        Mix_FreeMusic(lavaMusic);
+        Mix_FreeChunk(lavaChunk);
         backgroundMusic = nullptr;
+        lavaMusic = nullptr;
         Mix_CloseAudio();
+        TTF_Quit();
         SDL_Quit();
+
 }
+
